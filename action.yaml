@@ -1,0 +1,9 @@
+---
+name: Install Zig Language
+description: Install Zig language from master
+runs:
+  using: composite
+  steps:
+    - name: Install
+      run: ${{ github.action_path }}/install.sh
+      shell: bash
