@@ -5,5 +5,14 @@ runs:
   using: composite
   steps:
     - name: Install
-      run: ${{ github.action_path }}/install.sh
+      run: ${{ github.action_path }}/install.sh ${{ inputs.version }} ${{ inputs.flavor }}
       shell: bash
+inputs:
+  version:
+    description: "Which version to download"
+    default: master
+    required: false
+  flavor:
+    description: "Which build to download"
+    default: x86_64-linux
+    required: true
