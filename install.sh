@@ -17,7 +17,7 @@ print_progress_failure () {
     echo -e "\r${COLOR_ERROR} ✕ ${1} ${COLOR_CLEAR}"
 }
 
-VERSIONS="master 0.9.1 0.9.0 0.8.1 0.8.0 0.7.1 0.7.0 0.6.0 0.5.0 0.4.0 0.3.0 0.2.0 0.10.1 0.10.0 0.1.1"
+VERSIONS="master 0.9.1 0.9.0 0.8.1 0.8.0 0.7.1 0.7.0 0.6.0 0.5.0 0.4.0 0.3.0 0.2.0 0.10.1 0.10.0 0.10.1 0.11.0 0.1.1"
 FLAVOURS="src bootstrap x86_64-macos aarch64-macos x86_64-linux aarch64-linux riscv64-linux powerpc64le-linux powerpc-linux x86-linux x86_64-windows aarch64-windows x86-windows"
 
 print_usage () {
@@ -95,12 +95,15 @@ print_progress_warn "Installing ${filename}"
 tar -xf "${filename}"
 filedir=$(basename "${filename}" .tar.xz)
 mkdir -p "${PWD}/bin"
-ln -rs "${filedir}/zig" "${PWD}/bin/zig"
+ln -frs "${filedir}/zig" "${PWD}/bin/zig"
 print_progress_success "Installing ${filename}"
 
 print_progress_warn "Configuring zig executable"
 export PATH="${PATH}:${PWD}/bin"
-echo "${PWD}/bin" >> "${GITHUB_PATH}"
+if [[ -v GITHUB_PATH ]]; then
+    echo "${PWD}/bin" >> "${GITHUB_PATH}"
+fi
+
 print_progress_success "Configuring zig executable"
 
 print_progress_success "Done"
