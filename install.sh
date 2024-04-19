@@ -17,15 +17,15 @@ print_progress_failure () {
     echo -e "\r${COLOR_ERROR} ✕ ${1} ${COLOR_CLEAR}"
 }
 
-VERSIONS="master 0.9.1 0.9.0 0.8.1 0.8.0 0.7.1 0.7.0 0.6.0 0.5.0 0.4.0 0.3.0 0.2.0 0.10.1 0.10.0 0.10.1 0.11.0 0.1.1"
+VERSIONS="master 0.9.1 0.9.0 0.8.1 0.8.0 0.7.1 0.7.0 0.6.0 0.5.0 0.4.0 0.3.0 0.2.0 0.10.1 0.10.0 0.10.1 0.11.0 0.12.0 0.1.1"
 FLAVOURS="src bootstrap x86_64-macos aarch64-macos x86_64-linux aarch64-linux riscv64-linux powerpc64le-linux powerpc-linux x86-linux x86_64-windows aarch64-windows x86-windows"
 
 print_usage () {
     echo -e "\nUsage: install.sh [version] [flavour]"
     echo -e "\nVersion:\n"
-    echo -e "${VERSIONS}" | tr " " "\n"
+    echo -e "${VERSIONS}" | tr " " "\n" | sed "s/^/\t/"
     echo -e "\nFlavour:\n"
-    echo -e "${FLAVOURS}" | tr " " "\n"
+    echo -e "${FLAVOURS}" | tr " " "\n" | sed "s/^/\t/"
     echo ""
 }
 
@@ -53,7 +53,7 @@ download_flavour () {
 if [ $# -lt 2 ];
 then
    print_usage
-   echo "Error: Missing arguments"
+   print_progress_failure "Error: Missing arguments"
    exit 1
 fi
 
@@ -62,13 +62,13 @@ flavour=$2
     
 if ! has_item "${VERSIONS}" "${version}"; then
     print_usage
-    print_progress_failure "Error: Invalid version argument provided"
+    print_progress_failure "Error: Invalid version argument provided: ${version}"
     exit 1;
 fi
 
 if ! has_item "${FLAVOURS}" "${flavour}"; then
     print_usage
-    print_progress_failure "Error: Invalid flavour argument provided"
+    print_progress_failure "Error: Invalid flavour argument provided: ${flavour}"
     exit 1;
 fi
     
