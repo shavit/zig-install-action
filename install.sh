@@ -17,7 +17,7 @@ print_progress_failure () {
     echo -e "\r${COLOR_ERROR} ✕ ${1} ${COLOR_CLEAR}"
 }
 
-VERSIONS="master 0.9.1 0.9.0 0.8.1 0.8.0 0.7.1 0.7.0 0.6.0 0.5.0 0.4.0 0.3.0 0.2.0 0.10.1 0.10.0 0.10.1 0.11.0 0.12.0 0.1.1"
+VERSIONS="master 0.9.1 0.9.0 0.8.1 0.8.0 0.7.1 0.7.0 0.6.0 0.5.0 0.4.0 0.3.0 0.2.0 0.10.1 0.10.0 0.10.1 0.11.0 0.12.0 0.12.1 0.13.0 0.1.1"
 FLAVOURS="src bootstrap x86_64-macos aarch64-macos x86_64-linux aarch64-linux riscv64-linux powerpc64le-linux powerpc-linux x86-linux x86_64-windows aarch64-windows x86-windows"
 
 print_usage () {
